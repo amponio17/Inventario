@@ -40,11 +40,12 @@ class stock(models.Model):
     stock_id = models.AutoField(primary_key=True, null=False)
     stock_item_id = models.ForeignKey(items, on_delete=models.CASCADE,null=False)
     stock_position_id = models.ForeignKey(positions, on_delete=models.CASCADE,null=False)
+    stock_deseado = models.SmallIntegerField(null=False)
 
 #usuarios
 class users(models.Model):
     user_id = models.AutoField(verbose_name='nombre',primary_key=True, null=False)
-    user_id =models.CharField(max_length=8, null=False)
+    user_password =models.CharField(max_length=8, null=False)
     user_name =models.CharField(max_length=100, null=False)
     user_availability=models.BooleanField(null=False)
 
