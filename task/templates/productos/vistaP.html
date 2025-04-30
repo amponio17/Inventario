@@ -1,0 +1,56 @@
+{% extends "paginas/base.html"%}
+{% block titulo %} lista de productos {% endblock%}
+
+{% block contenido %} 
+<div class="card">
+    
+    <div class="card-body">
+        <h4 class="card-title">productos</h4>
+        
+        <a
+            name=""
+            id=""
+            class="btn btn-primary"
+            href="{% url 'agregar' %}"
+            role="button"
+            >Agregar</a>
+            <p></p>
+        
+       <div
+        class="table-responsive"
+       >
+        <table
+            class="table table-primary"
+        >
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">descripcion</th>
+                    <th scope="col">cantidad</th>
+                    <th scope="col">acciones</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td>1</td>
+                    <td>Mamadas</td>
+                    <td>bien ricas pa</td>
+                    <td>5</td>
+                    <td> <a name="" id="" class="btn btn-info" href="{% url 'editar' %}"role="button">Editar</a>
+                     | 
+                     <a name="" id="" class="btn btn-danger" href=""role="button">Borrar</a>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+       </div>
+       
+
+    </div>
+    
+</div>
+
+{% endblock%}
