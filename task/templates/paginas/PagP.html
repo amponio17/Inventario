@@ -2,8 +2,12 @@
 {% block titulo %} Home {% endblock%}
 
 {% block contenido %} 
-<h2>Tiene que ir toda la informacion general aqui
-    
-</h2>
+<head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <h1>Histograma de movimientos de stock</h1>
+    {{ grafico|safe }}
+  </body>
 
 {% endblock%}

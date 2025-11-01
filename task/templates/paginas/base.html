@@ -1,6 +1,6 @@
 {% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <title>{% block titulo %} {% endblock%}</title>
         <!-- Required meta tags -->
@@ -17,6 +17,7 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="{% static 'productos.css' %}">
     </head>
 
     <body>
@@ -27,7 +28,6 @@
                 <a class="nav-item nav-link" href="{% url 'historial' %}">Historial</a>
             {% if user.is_authenticated %}
             <a class="nav-item nav-link" href="{% url 'out'%}">Cerrar sesión</a>
-            <a class="nav-item nav-link" href="#"></a>
             {% else %}
             <a class="nav-item nav-link" href="{% url 'login' %}">Inicia sesión</a>
             {% endif %}
@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1>{% block contenido %} {% endblock%}</h1>
+                        {% block contenido %} {% endblock%}
                     </div>
                 </div>
 

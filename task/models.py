@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 #provedores
 class suppliers (models.Model):
@@ -61,21 +62,24 @@ class stock(models.Model):
         return str(self.stock_item_id)
 
 #usuarios
-class users (models.Model):
-    user_id = models.AutoField( verbose_name='ID', primary_key=True, null=False)
-    user_name =models.CharField(max_length=100, null=False,verbose_name='Nombre',)
-    user_password =models.CharField(max_length=8, null=False,verbose_name='Contraseña',)
-    user_availability=models.BooleanField(null=False,verbose_name='Activo',)
-    def __str__(self):
-             return self.user_name
+# class users (models.Model):
+#     user_id = models.AutoField( verbose_name='ID', primary_key=True, null=False)
+#     user_name =models.CharField(max_length=100, null=False,verbose_name='Nombre',)
+#     user_password =models.CharField(max_length=8, null=False,verbose_name='Contraseña',)
+#     user_availability=models.BooleanField(null=False,verbose_name='Activo',)
+    
+#     auth_user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+#     def __str__(self):
+#              return self.user_name
 
 #stock tracking
 class stock_tracking(models.Model):
     st_id = models.AutoField(primary_key=True, verbose_name='ID',null=False)
     st_id_stock =models.ForeignKey(stock, on_delete=models.CASCADE,null=False,verbose_name='Stock del Producto',)
-    st_id_user =models.ForeignKey(users, on_delete=models.CASCADE,null=False,verbose_name='Quien hace el movimiento',)
+    st_id_user =models.ForeignKey(User, on_delete=models.CASCADE,null=False,verbose_name='Quien hace el movimiento',)
     st_prev=models.IntegerField(verbose_name='Stock anterior')
     st_act=models.IntegerField(verbose_name='Stock nuevo')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Fecha del movimiento")
     def __str__(self):
         return str(self.st_id)
     

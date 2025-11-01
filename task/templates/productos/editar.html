@@ -1,18 +1,36 @@
-{% extends "paginas/base.html"%}
-{% block titulo %} Editar producto {% endblock%}
+{% extends "paginas/base.html" %}
+{% load static %}
+{% block titulo %}Editar producto{% endblock %}
 
-{% block contenido %} 
-<div class="card">
-    <div class="card-header">
-        <h4>Edita el producto</h4>
-    </div>
-    <div class="card-body">
-        
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'editar_producto.css' %}">
 
-        {% include 'productos/form.html' %}
+<div class="card edit-card">
+  <div class="card-header">
+    <h4 class="card-title">Edita el producto</h4>
+  </div>
 
-    </div>
-    <div class="card-footer text-muted">Footer</div>
+  <div class="card-body">
+    <form method="post" class="edit-form">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="error">{{ field.errors|striptags }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <div class="form-actions">
+        <button type="submit" class="btn-submit">Guardar cambios</button>
+        <a href="{% url 'productos' %}" class="btn-cancel">← Volver sin guardar</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="card-footer text-muted text-center">
+    Si no deseas guardar los cambios, puedes regresar a la lista de productos.
+  </div>
 </div>
-
-{% endblock%}
+{% endblock %}

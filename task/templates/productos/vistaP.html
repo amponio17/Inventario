@@ -1,56 +1,101 @@
-{% extends "paginas/base.html"%}
-{% block titulo %} Lista de productos {% endblock%}
-
-{% block contenido %} 
+{% extends "paginas/base.html" %} {% load static %} {% block titulo %}Lista de
+productos{% endblock %} {% block contenido %}
 <div class="card">
-    
-    <div class="card-body">
-        <h4 class="card-title">Productos</h4>
-        
-        <a
-            name=""
-            id=""
-            class="btn btn-primary"
-            href="{% url 'agregar' %}"
-            role="button"
-            >Agregar</a>
-            <p></p>
-        
-       <div
-        class="table-responsive"
-       >
-        <table
-            class="table table-primary"
+  <div class="card-body">
+    <h4 class="card-title">Productos</h4>
+
+    <form method="get" class="search-form">
+      <input
+        type="text"
+        name="q"
+        placeholder="Buscar producto..."
+        value="{{ query }}"
+        aria-label="Buscar producto"
+      />
+      <button type="submit" aria-label="Buscar">
+        <svg
+          width="46"
+          height="46"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Acciones</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="">
-                    <td>1</td>
-                    <td>Ejemplo</td>
-                    <td>Ejem</td>
-                    <td>5</td>
-                    <td> <a name="" id="" class="btn btn-info" href="{% url 'editar' %}"role="button">Editar</a>
-                     | 
-                     <a name="" id="" class="btn btn-danger" href=""role="button">Borrar</a>
-                    </td>
-                </tr>
-                
-            </tbody>
-        </table>
-       </div>
-       
+          <path
+            d="m21 21-6-6m2-5a7.001 7.001 0 0 1-11.95 4.95A7 7 0 1 1 17 10Z"
+          ></path>
+        </svg>
+      </button>
+    </form>
 
+    <div class="table-responsive">
+      <table class="table table-primary">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Proveedor</th>
+            <th>Posición</th>
+            <th>Cantidad</th>
+            <th>Necesarios</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in page_obj %}
+          <tr
+            class="{% if item.stock_item_amount == 0 %}out-of-stock{% elif item.stock_item_amount < item.stock_wanted %}low-stock{% endif %}"
+          >
+            <td data-label="Producto">{{ item.stock_item_id.item_name }}</td>
+            <td data-label="Proveedor">
+              {{ item.stock_item_id.item_suplier_id.suplier_name }}
+            </td>
+            <td data-label="Posición">
+              {{ item.stock_position_id.posotion_index }}
+            </td>
+            <td data-label="Cantidad">{{ item.stock_item_amount }}</td>
+            <td data-label="Necesarios">{{ item.stock_wanted }}</td>
+            <td data-label="Acciones">
+              <a
+                href="{% url 'editar_stock' item.pk %}"
+                class="btn btn-info"
+                aria-label="Editar {{ item.stock_item_id.item_name }}"
+                >Editar</a
+              >
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6">No se encontraron productos.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?q={{ query|urlencode }}&page=1">Primera</a>
+        <a
+          href="?q={{ query|urlencode }}&page={{ page_obj.previous_page_number }}"
+          >Anterior</a
+        >
+        {% endif %}
+        <span class="page-info"
+          >Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages}}</span
+        >
+        {% if page_obj.has_next %}
+        <a href="?q={{ query|urlencode }}&page={{ page_obj.next_page_number }}"
+          >Siguiente</a
+        >
+        <a
+          href="?q={{ query|urlencode }}&page={{ page_obj.paginator.num_pages }}"
+          >Última</a
+        >
+        {% endif %}
+      </div>
     </div>
-    
+  </div>
 </div>
-
-{% endblock%}
+{% endblock %}

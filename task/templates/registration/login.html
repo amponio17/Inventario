@@ -1,12 +1,38 @@
-{% extends 'registration/baseLogin.html' %}{% block login %}
-<div class="card">
-  <div class="card-body">
-    <h2>Login</h2>
-    <hr />
-    <form action="" method="post">
-      {% csrf_token %} {{form}}
-      <input type="submit" value="ingresar" />
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="{% static 'login.css' %}">
+  <title>Entrar</title>
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <h1>Iniciar sesión</h1>
+    {% if form.errors %}
+      <div class="errors">Usuario o contraseña inválidos</div>
+    {% endif %}
+    <form method="post" class="login-form">
+      {% csrf_token %}
+      <label for="{{ form.username.id_for_label }}">Usuario</label>
+      <input id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}"
+             type="text" value="{{ form.username.value }}" class="input-field">
+
+      <label for="{{ form.password.id_for_label }}">Contraseña</label>
+      <input id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}"
+             type="password" class="input-field">
+
+      {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+      {% endif %}
+
+      <button type="submit" class="btn-primary">Entrar</button>
     </form>
+
+    <div class="links">
+      <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+    </div>
   </div>
-</div>
-{% endblock %}
+</body>
+</html>

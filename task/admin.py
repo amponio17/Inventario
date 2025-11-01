@@ -3,7 +3,6 @@ from .models import suppliers
 from .models import categories
 from .models import items
 from .models import positions
-from .models import users
 from .models import stock
 from .models import stock_tracking
 # Register your models here.
@@ -23,9 +22,9 @@ class items(admin.ModelAdmin):
     list_display=('item_id', 'item_name', 'item_category_id','item_suplier_id')
 
 #vista de datos de usuarios
-@admin.register(users)
-class users(admin.ModelAdmin):
-    list_display=('user_id', 'user_name', 'user_availability')
+# @admin.register(users)
+# class users(admin.ModelAdmin):
+#     list_display=('user_id', 'user_name', 'user_availability')
 
 #vista de datos de stock
 @admin.register(stock)

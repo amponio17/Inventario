@@ -1,0 +1,113 @@
+/* --- Tarjeta general --- */
+.edit-card {
+  max-width: 600px;
+  margin: 32px auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(20,30,40,0.08);
+  overflow: hidden;
+  border: none;
+  background: #fff;
+}
+
+.card-header {
+  background-color: #f3f4f6;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* --- Formulario --- */
+.edit-form {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  color: #111827;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+  outline: none;
+}
+
+.error {
+  margin-top: 6px;
+  color: #b91c1c;
+  font-size: 0.85rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.btn-cancel {
+  padding: 10px 14px;
+  background-color: #f3f4f6;
+  color: #374151;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.btn-cancel:hover {
+  background-color: #e5e7eb;
+}
+
+/* --- Botón --- */
+.btn-submit {
+  display: inline-block;
+  padding: 10px 16px;
+  background-color: #0b74de;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-submit:hover {
+  background-color: #085ea8;
+  transform: translateY(-1px);
+}
+
+/* --- Footer --- */
+.card-footer {
+  padding: 16px;
+  font-size: 0.85rem;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}

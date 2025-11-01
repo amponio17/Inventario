@@ -1,0 +1,199 @@
+/* static/css/productos.css */
+
+/* Contenedor general */
+.card {
+  max-width: 1100px;
+  margin: 28px auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(20, 30, 40, 0.08);
+  overflow: hidden;
+  border: 0;
+}
+
+/* Card body */
+.card-body {
+  padding: 22px 26px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+}
+
+/* Título */
+.card-title {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* Form de búsqueda */
+form[method="get"] {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 12px 0 18px;
+  flex-wrap: wrap;
+}
+
+form[method="get"] input[type="text"] {
+  flex: 1 1 320px;
+  min-width: 180px;
+  padding: 10px 12px;
+  border: 1px solid #e3e7ee;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #111827;
+  background: #fff;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+form[method="get"] input[type="text"]:focus {
+  outline: none;
+  border-color: #6aa5ff;
+  box-shadow: 0 4px 14px rgba(59,130,246,0.12);
+}
+
+form[method="get"] button {
+  width: 15%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #0b74de;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .12s ease, transform .06s ease;
+}
+
+form[method="get"] button:hover {
+  background: #085ea8;
+  transform: translateY(-1px);
+}
+
+/* Tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+  background: transparent;
+  font-size: 0.95rem;
+}
+
+.table thead th {
+  text-align: left;
+  font-weight: 600;
+  color: #0f1724;
+  padding: 12px 14px;
+  border-bottom: 2px solid rgba(15,23,36,0.06);
+  background: linear-gradient(90deg, rgba(11,116,222,0.06), rgba(11,116,222,0.02));
+}
+
+.table tbody td {
+  padding: 12px 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(15,23,36,0.04);
+  color: #111827;
+}
+
+/* Resaltar filas según stock */
+.table tbody tr.low-stock td {
+  /* background: linear-gradient(90deg, rgba(255,241,225,0.6), rgba(255,255,255,0)); */
+  background-color: rgba(255, 255, 25, 0.300);
+
+}
+
+.table tbody tr.out-of-stock td {
+  /* background: linear-gradient(90deg, rgba(255,235,238,0.6), rgba(255,255,255,0)); */
+  background-color: rgba(255, 25, 25, 0.312);
+}
+
+/* Botón de acción */
+a.btn {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 7px;
+  text-decoration: none;
+  color: #1f1f1f;
+  font-size: 0.9rem;
+}
+
+a.btn.btn-info {
+  background: transparent;
+  border: 1px solid rgb(39, 39, 39);
+}
+
+a.btn.btn-info:hover {
+  background: rgba(39, 39, 39, 0.1);
+}
+
+/* a.btn.btn-info:hover {
+  background: #0b8e8c;
+} */
+
+/* Mensaje de vacío */
+.table tbody tr td[colspan] {
+  text-align: center;
+  color: #6b7280;
+  padding: 28px;
+  font-style: italic;
+}
+
+/* Paginación simple */
+.table + div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 12px;
+  color: #374151;
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.table + div a {
+  color: #0b74de;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background .12s ease;
+}
+
+.table + div a:hover {
+  background: rgba(11,116,222,0.06);
+}
+
+/* Responsividad */
+@media (max-width: 720px) {
+  .card {
+    margin: 16px;
+  }
+  form[method="get"] {
+    gap: 6px;
+  }
+  .table thead {
+    display: none;
+  }
+  .table tbody td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .table tbody tr {
+    display: block;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(15,23,36,0.03);
+    overflow: hidden;
+  }
+  .table tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(15,23,36,0.04);
+  }
+  .table tbody td::before {
+    content: attr(data-label);
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+  }
+}
