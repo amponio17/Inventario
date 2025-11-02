@@ -1,0 +1,167 @@
+/* --- Contenedor general --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Título y filtros --- */
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0;
+}
+
+#filtersForm {
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+#filtersForm .form-control {
+  min-width: 180px;
+  font-size: 0.95rem;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#filtersForm .form-control:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+}
+
+#filtersForm .btn {
+  font-size: 0.9rem;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+#filtersForm .btn-primary {
+  background-color: #0b74de;
+  border-color: #0b74de;
+}
+
+#filtersForm .btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+#filtersForm .btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+#filtersForm .btn:hover {
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+/* --- Tarjeta de tabla --- */
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* --- Tabla --- */
+.table {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.table thead th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+  padding: 12px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.table tbody td {
+  padding: 12px;
+  vertical-align: middle;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1f2937;
+}
+
+.table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.text-muted {
+  color: #6b7280 !important;
+}
+
+/* --- Pie de tarjeta / paginación --- */
+.card-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.card-footer small {
+  font-size: 0.85rem;
+}
+
+.pagination {
+  margin-bottom: 0;
+}
+
+.page-item .page-link {
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  color: #0b74de;
+  border: 1px solid #d1d5db;
+  transition: background-color 0.2s ease;
+}
+
+.page-item.active .page-link {
+  background-color: #0b74de;
+  color: #fff;
+  border-color: #0b74de;
+}
+
+.page-item.disabled .page-link {
+  color: #9ca3af;
+  background-color: #f3f4f6;
+  border-color: #e5e7eb;
+}
+
+.page-item .page-link:hover {
+  background-color: #e0f2fe;
+  border-color: #0b74de;
+}
+
+/* --- Responsive ajustes --- */
+@media (max-width: 768px) {
+  #filtersForm {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #filtersForm .col-auto {
+    width: 100%;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .pagination {
+    justify-content: center;
+    width: 100%;
+  }
+}

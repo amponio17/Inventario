@@ -1,32 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="{% static 'login.css' %}">
+  <title>Entrar</title>
 </head>
-<body>
-    <div class="container">
-        
-        <div class="col-12 col-md-6 offset-md-3">
+<body class="login-page">
+  <div class="login-container">
+    <h1>Iniciar sesión</h1>
+    {% if form.errors %}
+      <div class="errors">Usuario o contraseña inválidos</div>
+    {% endif %}
+    <form method="post" class="login-form">
+      {% csrf_token %}
+      <label for="{{ form.username.id_for_label }}">Usuario</label>
+      <input id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}"
+             type="text" value="{{ form.username.value }}" class="input-field">
 
-        <div class="card">
-            <div class="card-body">
-                <h2>inicia seion</h2>
-                <hr>
-                <form action="" method="post">
+      <label for="{{ form.password.id_for_label }}">Contraseña</label>
+      <input id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}"
+             type="password" class="input-field">
 
-                    {% csrf_token %}
-                    {{form}}
-                    <input type="submit" value="ingresar">
-                </form>
-            
-            </div>
-        </div>
+      {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+      {% endif %}
 
-        </div>
+      <button type="submit" class="btn-primary">Entrar</button>
+    </form>
 
+    <div class="links">
+      <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
     </div>
-    
+  </div>
 </body>
 </html>

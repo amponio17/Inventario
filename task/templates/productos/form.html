@@ -1,5 +1,7 @@
 <form enctype="multipart/form-data" method="post">
-    
+    {% csrf_token %}
+    {{ form }}
+
 <div class="mb-3">
     <label for="" class="form-label"><H4>Nombre</H4></label>
     <input
@@ -10,7 +12,26 @@
         aria-describedby="helpId"
         placeholder="Nombre"
     />
+    <input
+        type="text"
+        class="form-control"
+        name=""
+        id=""
+        aria-describedby="helpId"
+        placeholder="Descripcion"
+    />
+    <input
+        type="text"
+        class="form-control"
+        name=""
+        id=""
+        aria-describedby="helpId"
+        placeholder="Cantidad"
+    />
 </div>
+<button type="submit" class="btn btn-primary">
+    Agregar
+</button>
 
 
 </form>

@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-from .db import MYSQL
-import dj_database_url 
+# from .db import MYSQL
+# import dj_database_url 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #'RENDER' not in os.environ
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -86,12 +86,18 @@ WSGI_APPLICATION = 'invetario.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
-        conn_max_age=600
-    )
-    
+  'default': {
+    'ENGINE':   'django.db.backends.mysql',
+    'NAME':     os.environ.get('DB_NAME',     'inventory'),
+    'USER':     os.environ.get('DB_USER',     'root'),
+    'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
+    'HOST':     os.environ.get('DB_HOST',     '127.0.0.1'),
+    'PORT':     os.environ.get('DB_PORT',     '3306'),
+    # Opcional: asegurar uso de SSL si el hosting lo exige
+    # 'OPTIONS': {
+    #     'ssl': {'ca': '/ruta/al/ca.pem'},
+    # },
+  }
 }
  
 

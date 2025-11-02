@@ -7,6 +7,7 @@ urlpatterns = [
     path('historial', views.historial, name='historial' ),
     path('productos', views.productos, name='productos' ),
     path('productos/agregar', views.agregar, name='agregar' ),
-    path('productos/editar', views.editar, name='editar' ),
+    path('productos/editar/<int:pk>/', views.editar_stock, name='editar_stock'),
+    path('productos/eliminar/<int:pk>/', views.eliminar_stock, name='eliminar_stock'),
     path('out', views.logout_request, name="out"),
 ]

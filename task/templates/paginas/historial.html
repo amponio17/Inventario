@@ -1,6 +1,144 @@
-{% extends "paginas/base.html"%}
-{% block titulo %} agregar nuevo producto {% endblock%}
+{% extends "paginas/base.html" %}
+{% load static %}
+{% block titulo %}Historial{% endblock %}
 
 {% block contenido %}
-<h2>aqui va el historial de movimientos</h2>
- {% endblock%}
+<link rel="stylesheet" href="{% static 'historial.css' %}">
+
+<div class="container py-4">
+  <div class="d-flex justify-content-center align-items-center mb-3 flex-wrap gap-3">
+    <h3>Movimientos de stock</h3>
+
+    <form class="row g-4" method="get" id="filtersForm">
+      <div class="col-auto">
+        <input
+          type="text"
+          name="product"
+          class="form-control"
+          placeholder="Producto (id o nombre)"
+          value="{{ filters.product }}"
+          aria-label="Filtrar por producto"
+        />
+      </div>
+      <div class="col-auto">
+        <input
+          type="text"
+          name="user"
+          class="form-control"
+          placeholder="Usuario (id o username)"
+          value="{{ filters.user }}"
+          aria-label="Filtrar por usuario"
+        />
+      </div>
+      <div class="col-auto">
+        <input
+          type="date"
+          name="start_date"
+          class="form-control"
+          value="{{ filters.start_date }}"
+          aria-label="Fecha inicial"
+        />
+      </div>
+      <div class="col-auto">
+        <input
+          type="date"
+          name="end_date"
+          class="form-control"
+          value="{{ filters.end_date }}"
+          aria-label="Fecha final"
+        />
+      </div>
+      <div class="col-12 d-flex justify-content-center gap-2">
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+        <a href="{% url 'historial' %}" class="btn btn-outline-danger">Limpiar filtros</a>
+        <a
+          href="?{% if filters.product %}product={{ filters.product }}&{% endif %}{% if filters.user %}user={{ filters.user }}&{% endif %}{% if filters.start_date %}start_date={{ filters.start_date }}&{% endif %}{% if filters.end_date %}end_date={{ filters.end_date }}&{% endif %}export=csv"
+          class="btn btn-outline-secondary"
+        >Exportar CSV</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped mb-0">
+          <thead class="table-secondary">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Cantidad antes</th>
+              <th scope="col">Cantidad después</th>
+              <th scope="col">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for mov in page_obj.object_list %}
+            <tr>
+              <td data-label="ID">{{ mov.st_id }}</td>
+              <td data-label="Producto">
+                {% if mov.st_id_stock and mov.st_id_stock.stock_item_id %}
+                  {{ mov.st_id_stock.stock_item_id.item_name }}
+                {% else %}
+                  <span class="text-muted">-</span>
+                {% endif %}
+              </td>
+              <td data-label="Usuario">{{ mov.st_id_user.username }}</td>
+              <td data-label="Cantidad antes">{{ mov.st_prev }}</td>
+              <td data-label="Cantidad después">{{ mov.st_act }}</td>
+              <td data-label="Fecha">{{ mov.created_at|date:"d/m/Y H:i:s" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="6" class="text-center text-muted py-4">
+                No se encontraron movimientos.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card-footer bg-white d-flex justify-content-between align-items-center flex-wrap">
+      <div>
+        <small class="text-muted">
+          Mostrando {{ page_obj.start_index }} - {{ page_obj.end_index }} de {{ page_obj.paginator.count }}
+        </small>
+      </div>
+      <nav aria-label="Paginación">
+        <ul class="pagination mb-0">
+          {% with qs=request.GET.urlencode %}
+            {% if page_obj.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if qs %}&{{ qs|cut:'page=' }}{% endif %}" aria-label="Anterior">&laquo;</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+
+            {% for num in page_range %}
+              {% if num == page_obj.number %}
+                <li class="page-item active" aria-current="page"><span class="page-link">{{ num }}</span></li>
+              {% else %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ num }}{% if qs %}&{{ qs|cut:'page=' }}{% endif %}">{{ num }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if qs %}&{{ qs|cut:'page=' }}{% endif %}" aria-label="Siguiente">&raquo;</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+          {% endwith %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}

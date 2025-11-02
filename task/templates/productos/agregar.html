@@ -1,19 +1,31 @@
-{% extends "paginas/base.html"%}
-{% block titulo %} agregar nuevo producto {% endblock%}
-
-{% block contenido %} 
+{% extends "paginas/base.html"%} {% block titulo %} agregar nuevo producto
+{%endblock%} {% block contenido %}
 
 <div class="card">
-    <div class="card-header">
-        <h4>Agrega un nuevo producto</h4>
-    </div>
-    <div class="card-body">
-        
+  <div class="card-header">
+    <h4>Agrega un nuevo producto</h4>
+  </div>
+  <div class="card-body">
+    <h1>Agregar nuevo producto</h1>
 
-        {% include 'productos/form.html' %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+        {{ message }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
 
-    </div>
-    <div class="card-footer text-muted">Footer</div>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Agregar</button>
+    </form>
+
+    <!-- {% include 'productos/form.html' %} -->
+  </div>
+  <div class="card-footer text-muted">Footer</div>
 </div>
 
 {% endblock%}
